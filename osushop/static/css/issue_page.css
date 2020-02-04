@@ -1,0 +1,205 @@
+@charset "utf-8";
+/*选择所有标签*/
+.issue_second_gooods_bg {
+    width: 100%;
+    height: 10%;
+    background-color: #f2f2f2;
+}
+/*11*/
+.issue_second_gooods {
+    width: 1000px;
+    height: 120px;
+    background-color: #f2f2f2;
+}
+.bg_70 {
+    width: 100%;
+    height: 75px;
+    border-radius: 5px;
+    background-color:white;
+}
+.issue_second_gooods_white_text {
+    font-family: 微软雅黑;
+    font-size: 18px;
+
+}
+.issue_big_bg {
+    width: 1000px;
+    height: 1040px;
+    background-color: white;
+    border-radius: 5px;
+}
+.with_90{
+    width: 90%;
+    height: 96%;
+    background-color: white;
+}
+.issue_big_bg_middle {
+    width: 100%;
+    height: 1040px;
+    background-color: #f2f2f2;
+}
+.issue_img_bg{
+    width: 240px;
+    height: 240px;
+    background-color: white;
+    margin-left: 35px;
+    margin-top: 15px;
+}
+.issue_img_bg img{
+    width: 100%;
+    height: 100%;
+}
+.input-line.image {
+    text-align: center;
+}
+
+.input-line {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#issue_form {
+    height: 100%;
+    width: 100%;
+}
+
+
+#img_show_bg {
+    width: 200px;
+    height: 200px;
+}
+
+.tiaozheng {
+    width: 80%;
+    height: 95%;
+    border-radius: 5px;
+}
+
+.issue_button_submit_bg {
+    width: 100%;
+    height: 60px;
+}
+
+.issue_button_submit {
+    width: 200px;
+    height: 60px;
+    background-color: #11cd6e;
+    border-radius: 5px;
+    color: white;
+    font-size: 24px;
+}
+
+.zuo_40 {
+    float: left;
+    width: 350px;
+    height: 450px;
+    background: white;
+}
+
+.you_60 {
+    float: left;
+    margin-left: 30px;
+    width: 420px;
+    height: 450px;
+}
+
+.zuo_40 img {
+    width: 100%;
+    height: 100%;
+}
+
+.shang_10 {
+    width: 100%;
+    height: 51px;
+    border-bottom: solid 2px #f2f2f2;
+}
+
+.basic_class {
+    width: 100%;
+    height: 48px;
+}
+
+.you_first {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+
+.price_red {
+    margin-left: 70px;
+    float: left;
+    color: #f40;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.goods_text {
+    color: #999;
+    float: left;
+}
+
+.deal_function {
+    margin-left: 20px;
+}
+
+.deal_function1 {
+    margin-left: 47px;
+}
+
+.wechat_num {
+    margin-left: 103px;
+}
+
+.bg_sum {
+    width: 100%;
+    height: 102px;
+}
+
+.cart_button {
+    width: 140px;
+    height: 50px;
+    background-color: #11cd6e;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    margin-left: -80px;
+}
+
+.cart_button:hover {
+    cursor: pointer;
+}
+
+.erhuo_bg {
+    float: left;
+    width: 100%;
+    height: 80px;
+    border-bottom: solid 1px #11cd6e;
+}
+
+.erhuozuo {
+    width: 120px;
+    height: 80px;
+    float: bottom;
+    border-bottom: solid 5px #11cd6e;
+}
+
+.erhuomiaoshu {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.detal_bg {
+    width: 100%;
+    height: 200px;
+
+}
+
+.detal {
+    color: #999;
+}
+
+.detal_bg_middle {
+    width: 90%;
+    height: 90%;
+
+}

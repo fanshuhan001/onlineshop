@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>good_tetal_page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static "css/user_center_last.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/center_head.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/banner.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/user_center.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/layui/css/layui.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/issue_page.css" %}"/>
+</head>
+
+<body style="height: 200%">
+{#头部背景#}
+<div class="head_blue">
+    {#头部中部分70%#}
+    <div class="head_middle">
+        {#头部中间商标背景div#}
+        <div class="head_brand">
+            {#头部中间商标#}
+            <div>
+                <a class="head_brand_middle" href="#"></a>
+            </div>
+        </div>
+        {#头部首页#} <a id="home_page" href="index">HOME</a>
+        {#头部淘宝#} <a id="home_taobao" href="https://www.tmall.com/">淘宝</a>
+        {#头部拼多多#} <a id="home_pinduoduo" href="https://www.pinduoduo.com">拼多多</a>
+        <div id="home_blank" href="/"></div>
+        {% if nick_name == None %}
+            {#头部用户#} <a id="home_user" href="register_page">Sign in</a>
+            {#头部退出#} <a id="home_quit" href="login_page">Log in</a>
+        {% else %}
+            {#头部用户#} <a id="home_user" href="user_center">{{ nick_name }}</a>
+            {#头部退出#} <a id="home_quit" href="logout">Log out</a>
+        {% endif %}
+    </div>
+</div>
+{#导航栏下方发布二手物品这一栏目#}
+{#最大的一块的背景#}
+<div class="issue_big_bg_white div_in_shuiping">
+    <div class="issue_big_bg layui-form layui-form-pane div_in_juzhong">
+        <div class="tiaozheng">
+            <div class="shang_10 div_in_chuizhi">
+                <p>发布于：{{ goods_detail.create_time }}</p>
+            </div>
+            <div class="zuo_40">
+                <img src="{{ MEDIA_URL }}{{ goods_detail.img }}">
+            </div>
+            <div class="you_60">
+                <div class="basic_class div_in_chuizhi">
+                    <h2>{{ goods_detail.name }}</h2>
+                </div>
+                <div class="you_first div_in_chuizhi">
+                    <p class="goods_text">price</p>
+                    <p class="price_red">￥{{ goods_detail.price }}</p>
+                </div>
+                <div class="you_first div_in_chuizhi">
+                    <p class="goods_text">shipping method</p>
+                    <p class="deal_function1">
+                        {% if goods_detail.trading == 1 %}
+                            delivery by seller
+                        {% endif %}
+                        {% if goods_detail.trading == 2 %}
+                            Pick up by buyer
+                        {% endif %}
+                        {% if goods_detail.trading == 3 %}
+                            Face-to-face transaction
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="you_first div_in_chuizhi">
+                    <p class="goods_text">contact</p>
+                    <p class="deal_function">email:</p>
+                    <text>{{ goods_detail.master_qqnum }}</text>
+                </div>
+{#                <div class="you_first div_in_chuizhi">#}
+{#                    <p class="wechat_num">Phone #1:</p>#}
+{#                    <text>{{ goods_detail.master_wechatnum }}</text>#}
+{#                </div>#}
+                <div class="you_first div_in_chuizhi">
+                    <p class="wechat_num">Phone #:</p>
+                    <text>{{ goods_detail.master_pho }}</text>
+                </div>
+                <div class="bg_sum div_in_juzhong">
+                    <button class="cart_button" onclick="join_cart({{ goods_detail.id }})">add to cart</button>
+                </div>
+            </div>
+            <div class="erhuo_bg">
+                <div class="erhuozuo div_in_juzhong">
+                    <p class="erhuomiaoshu">description</p>
+                </div>
+                <div class="detal_bg div_in_juzhong">
+                    <div class="detal_bg_middle">
+                        <text class="detal">{{ goods_detail.detal }}</text>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<div class="div_weibu" style="margin-top: 0px">#}
+{#    <div class="div_weibu_56">#}
+{#        <div class="div_weibu_56_70">#}
+{#            <div class="div_weibu_56_70_1">#}
+{#                <div class="tiaoweizhi">#}
+{#                    <div class="div_51_51_1"></div>#}
+{#                    <div class="div_130_51"><h4 class="h4_1"><font color="white">30天无忧退换货</font></h4></div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="div_weibu_56_70_2">#}
+{#                <div class="tiaoweizhi">#}
+{#                    <div class="div_51_51_2"></div>#}
+{#                    <div class="div_130_51"><h4 class="h4_1"><font color="white">30天无忧退换货</font></h4></div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="div_weibu_56_70_3">#}
+{#                <div class="tiaoweizhi">#}
+{#                    <div class="div_51_51_3"></div>#}
+{#                    <div class="div_130_51"><h4 class="h4_1"><font color="white">30天无忧退换货</font></h4></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="div_weibu_44">#}
+{#        <div class="div_weibu_zhong">#}
+{#            <font color="#999"> 关于我们&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp帮助中心&nbsp&nbsp&nbsp#}
+{#                |&nbsp&nbsp&nbsp售后服务&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp配送与验收&nbsp&nbsp&nbsp|#}
+{#                &nbsp&nbsp&nbsp商务合作&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp企业采购&nbsp&nbsp&nbsp#}
+{#                |&nbsp&nbsp&nbsp开放平台&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp搜索推荐&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp#}
+{#                友情链接</font>#}
+{#        </div>#}
+{#        <div class="div_weibu_zhong2">#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+<script type="text/javascript" src="{% static "js/jquery/jquery-3.3.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "css/layui/layui.all.js" %}"></script>
+<script type="text/javascript">
+    function join_cart(id) {
+        $.ajax({
+            url: "join_cart",
+            type: "GET",
+            data: {"id": id},
+            dataType: "json",
+            success: function (data) {
+                if (data == 1) {   //询问框
+                    layer.confirm('added to cart', {
+                        btn: ['finish', 'cancel'] //按钮
+                    }, function () {
+                        window.location.href = "user_center";
+                    }, function () {
+
+                    });
+                }
+                if (data == 2) {
+                     layer.msg("Added to cart successfully!");
+                }
+            },
+            error: function () {
+                layer.msg("未知错误");
+            }
+        });
+
+    }
+
+</script>
+</body>

@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="{% static "js/jquery/jquery-3.3.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/unslider.min.js" %}"></script>
+
+    <title>OSU Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static "css/index_show.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/index_head.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/banner.css" %}"/>
+</head>
+
+<body>
+{#头部背景#}
+<div class="head_blue">
+    {#头部中部分70%#}
+    <div class="head_middle">
+        {#头部中间商标背景div#}
+        <div class="head_brand">
+            {#头部中间商标#}
+            <div>
+                <a class="head_brand_middle" href="#">
+                </a>
+            </div>
+        </div>
+        {#头部首页#} <a id="home_page" href="index">HOME</a>
+        {#头部淘宝#} <a id="home_taobao" href="https://www.ebay.com/">Ebay</a>
+        {#头部拼多多#} <a id="home_pinduoduo" href="https://www.dealmoon.com/">Dealmoon</a>
+        {#头部空白#}
+        <div id="home_blank" href="/"></div>
+        {% if nick_name == None %}
+            {#头部用户#} <a id="home_user" href="register">Register</a>
+            {#头部退出#} <a id="home_quit" href="login">Log in</a>
+        {% else %}
+            {#头部用户#} <a id="home_user" href="#">{{ nick_name }}</a>
+            {#头部退出#} <a id="home_quit" href="logout">Log out</a>
+        {% endif %}
+    </div>
+</div>
+{#第二条白色部分#}
+<div class="second_while">
+    {#第二条白色部分中间#}
+    <div class="second_middle">
+        {#筛选按钮#}
+        <div class="frist">
+            <div class="frist_middle">
+                <select>
+                    <option value="volvo">delivery by seller</option>
+                    <option value="saab">Face-to-face transaction</option>
+                    <option value="opel">Face-to-face transaction</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="second">
+            <div class="two_middle">
+                <div class="l_blank">
+                    <input id="input_pass" type="text" placeholder="search by keywords" class="keywords">
+                </div>
+                <div class="r_blank">
+                    {#搜索#} <a id="sousuo" href="#" onclick="search_key()">search</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="thrid"></div>
+        <div class="four">
+            <div class="four_middle">
+                <a class="wenzi" href="issue_page"> Sell My Used</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#固定悬浮窗#}
+<div class="fixation_floating_bg">
+    <div class="sort_bg">
+        <a class="sort" href="#">Phone</a>
+{#        <a class="sort" href="search?sort_id=1">Phone</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">PC/Laptop</a>
+{#        <a class="sort" href="search?sort_id=2">PC/Laptop</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Clothes</a>
+{#        <a class="sort" href="search?sort_id=3">Accessories</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Appliances</a>
+{#        <a class="sort" href="search?sort_id=4">Foods</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Others</a>
+{#        <a class="sort" href="search?sort_id=5">Books</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Books</a>
+{#        <a class="sort" href="search?sort_id=6">Cars</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Foods</a>
+{#        <a class="sort" href="search?sort_id=7">Sports</a>#}
+    </div>
+    <div class="sort_bg">
+        <a class="sort" href="#">Sports</a>
+{#        <a class="sort" href="search?sort_id=8">Others</a>#}
+    </div>
+        <div class="sort_bg">
+        <a class="sort" href="#">Others</a>
+{#        <a class="sort" href="search?sort_id=8">Others</a>#}
+    </div>
+</div>
+
+{#<div class="tex"></div>#}
+
+{#首页轮播#}
+<div class="big_bg">
+    <div class="Carousel_bg">
+        <div class="banner" id="banner" style="width: 100%;">
+            <ul>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="{% static "img/lun1.jpg" %}" alt="" width="100%" height="300">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="{% static "img/lun2.jpg" %}" alt="" width="100%" height="300">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#"><img src="{% static "img/lun3.jpg" %}" alt="" width="100%" height="300">
+                    </a>
+                </li>
+                <li class="slider-item">
+                    <a href="#">
+                        <img src="{% static "img/lun4.jpg" %}" alt="" width="100%" height="300">
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="progress"></div>
+
+            <a href="javascript:void(0);" class="arrow-a prev">
+                <img class="arrow" id="al" src="{% static "img/arrowl.png" %}" alt="prev" width="35" height="35">
+            </a>
+            <a href="javascript:void(0);" class="arrow-a next">
+                <img class="arrow" id="ar" src={% static "img/arrowr.png" %} alt="next" width="35" height="35">
+            </a>
+        </div>
+    </div>
+</div>
+
+{#分页#}
+<div class="fenye_bg">
+    {% for foo in goods_list %}
+        <div class="l_1">
+            <div class="l_1_70">
+                <a href="#"><img class="img_70" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}"></a>
+{#                <a href="good_detail_page?id={{ foo.id }}"><img class="img_70" src="{{ MEDIA_URL }}{{ foo.img }}"></a>#}
+            </div>
+            <div class="l_1_15_txt">
+                <a class="list_text" href="/">{{ foo.name }}</a>
+            </div>
+            <div class="bg_15"><h3 class="l_1_15"> $ {{ foo.price }}</h3></div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+<script type="text/javascript">
+
+     function search_key() {
+         var key = $("#input_pass").val();
+         {#window.location.href = "search?key=" + key;#}
+    }
+
+
+    $(document).ready(function (e) {
+        var progress = $(".progress"), li_width = $("#banner li").length;
+        var unslider = $('#banner').unslider({
+                dots: true,
+                complete: function (index) {
+                    progress.animate({"width": (100 / li_width) * (index + 1) + "%"});
+                }
+            }),
+            data = unslider.data('unslider');
+        $('.arrow-a').click(function () {
+            var fn = this.className.split(' ')[1];
+            data[fn]();
+        });
+    });
+
+</script>
+</body>
+</html>

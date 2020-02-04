@@ -1,0 +1,347 @@
+@charset "UTF-8";
+
+table, thead, tbody, tfoot, th, tr, td {
+    border-collapse: collapse;
+}
+
+/* 控制编辑区域的 */
+input[type="date"]::-webkit-datetime-edit {
+    /* content: '起始时间'; */
+    color: rgb(188, 188, 188);
+    padding-left: 10px;
+}
+
+/* 控制年月日这个区域的 */
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    background-color: #eee;
+}
+
+/* 这是控制年月日之间的斜线或短横线的 */
+input[type="date"]::-webkit-datetime-edit-text {
+    color: blue;
+    padding: 0 .3em;
+}
+
+/* 控制年字 */
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: purple;
+}
+
+/* 控制月字 */
+input[type="date"]::-webkit-datetime-edit-month-field {
+    color: red;
+}
+
+/* 控制日字 */
+input[type="date"]::-webkit-datetime-edit-day-field {
+    color: pink;
+}
+
+/*控制下拉小箭头的*/
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    /* position: absolute;
+    top: 12px;
+    right: 0px; */
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-shadow: inset 0 1px #fff, 0 1px #eee;
+    background-color: #eee;
+    /* background:url('../images/icon.png') -188px -99px; */
+    background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
+    color: #666;
+}
+
+/* 去掉date中上下小三角，但是保留input类型为number的小三角。 */
+input[type=date]::-webkit-inner-spin-button {
+    visibility: hidden;
+}
+
+.user-center-holder {
+    width: 80%;
+    margin: 20px 10%;
+    overflow: hidden;
+}
+
+.left-tab-holder {
+    width: 198px;
+    height: 410px;
+    border: #e8e8e8 solid 1px;
+}
+
+.right-content-holder {
+    width: 100%;
+    /*height: 400px;*/
+    border: #e8e8e8 solid 1px;
+}
+
+.person-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+.person-ul {
+    width: 160px;
+    margin: 0 20px;
+    border-top: #e8e8e8 solid 1px;
+}
+
+.person-ul .person-li-item {
+    width: 70%;
+    height: 25px;
+    line-height: 25px;
+    margin: 15px 15%;
+    padding-left: 6px;
+}
+
+.active-on {
+    border-left: #1E9FFF solid 2px;
+}
+
+.active-on a {
+    color: #1E9FFF;
+}
+
+.a-click {
+    color: #1E9FFF;
+}
+
+.person-ul .person-li-item a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.person-ul .person-li-item a:hover {
+    color: #1E9FFF;
+}
+
+.tab-change-container {
+    width: 100%;
+    height: 60px;
+    /*margin: 0 4%;*/
+}
+
+.tab-span {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.tab-span a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.tab-a-on {
+    color: #1E9FFF;
+    border-bottom: #1E9FFF solid 2px;
+}
+
+.tab-a-not-on {
+    border-bottom: #e8e8e8 solid 2px;
+}
+
+.left-border {
+    border-left: #e8e8e8 solid 1px;
+}
+
+.left-right-border {
+    border-left: #e8e8e8 solid 1px;
+    border-right: #e8e8e8 solid 1px;
+}
+
+.right-border {
+    border-right: #e8e8e8 solid 1px;
+}
+
+.order-table-container {
+    width: 92%;
+    margin: 16px 4%;
+}
+
+#person-info-holder {
+    width: 92%;
+    margin: 16px 4%;
+}
+
+.order-table {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.order-tb-thread tr {
+    width: 100%;
+    height: 40px;
+    background-color: #f5f5f5;
+    /*font-weight: 100;*/
+}
+
+.order-tb-thread th {
+    font-weight: 400;
+}
+
+.order-table tbody {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.order-table tbody tr {
+    border: #e2e2e2 solid 1px;
+}
+
+.order-table tbody td {
+    height: 50px;
+    text-align: center;
+    border-right: #e2e2e2 solid 1px;
+}
+
+.order-table tbody td:last-child {
+    border: none;
+}
+
+.empty-tr {
+    width: 100%;
+    height: 15px;
+}
+
+#person-info-form {
+    width: 100%;
+    min-height: 300px;
+    border: #e8e8e8 1px solid;
+    margin-top: 5px;
+}
+
+.form-item {
+    height: 40px;
+    margin: 15px 20px;
+}
+
+.item-tip {
+    height: 40px;
+    width: 120px;
+    line-height: 40px;
+}
+
+.item-input-holder {
+    height: 40px;
+    margin-left: 10px;
+    line-height: 40px;
+}
+
+.item-input-holder input {
+    height: 38px;
+    width: 300px;
+    border: #1E9FFF solid 1px;
+    padding-left: 10px;
+}
+
+.item-input-holder input[type="file"] {
+    height: 38px;
+    width: 300px;
+    border: #1E9FFF solid 1px;
+    /*padding-left: 10px;*/
+}
+
+.item-input-holder input[type="radio"] {
+    height: 20px;
+    width: 20px;
+    margin: 10px 5px;
+}
+
+.item-input-holder input:focus {
+    outline: cornflowerblue 1px solid;
+}
+
+.radio-holder {
+    height: 40px;
+    width: 30px;
+}
+
+.radio-s {
+    height: 40px;
+    width: 20px;
+}
+
+#edit-personInfo-btn {
+    height: 40px;
+    width: 100px;
+    margin-left: 10px;
+    color: white;
+    font-size: 16px;
+    background-color: #1E9FFF;
+    border-radius: 4px;
+}
+
+/*上传文件样式*/
+/*蓝色按钮,绝对定位*/
+.blueButton {
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    background-color: dodgerblue;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font: normal normal normal 16px/40px 'Microsoft YaHei';
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.blueButton:hover {
+    text-decoration: none;
+}
+
+/*自定义上传,位置大小都和a完全一样,而且完全透明*/
+.myFileUpload {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+}
+
+/*显示上传文件夹名的Div*/
+.show {
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    margin-left: 110px;
+    font: normal normal normal 14px/40px 'Microsoft YaHei';
+}
+
+#user-img-container {
+    max-height: 135px;
+    max-width: 135px;
+    margin-left: 150px;
+    border: #e2e2e2 solid 1px;
+}
+
+#user-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.red-tip {
+    color: red;
+    height: 40px;
+    width: 25px;
+    float: left;
+    line-height: 40px;
+    font-weight: bolder;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+

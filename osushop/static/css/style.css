@@ -1,0 +1,195 @@
+html,body{
+    min-width: 1090px;
+    min-height: 100%;
+    background: #fff;
+}
+
+.middle{
+    width: 100%;
+    height: auto;
+    padding-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+
+}
+
+.m-row{
+    width: 80%;
+    height: auto;
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    background: white;
+}
+
+/* 小标签样式 */
+.m_crumbs{
+    width: 85%;
+
+    align-self: center;
+    font-size: 12px ;
+    color: grey;
+    padding: 5px;
+}
+
+.middle_top{
+    width: 80%;
+    height: 300px;
+    align-self: center;
+
+}
+
+.middle_middle{
+    width: 85%;
+    align-self: center;
+    font-size: 12px ;
+    color: grey;
+    padding: 10px;
+    height: 100%;
+}
+
+.middle_menu{
+    padding: 10px;
+    height: 120px;
+}
+
+/* 菜单栏css样式 */
+.category{
+    border-bottom: 1px solid;
+    clear: both;
+    height: 23%;
+}
+
+
+
+.name{
+    font-size: 14px;
+    color: #999;
+    float: left;
+    margin-right: 25px;
+}           /* 菜单栏分类头样式 */
+
+.category_group{
+    overflow: hidden;
+    float: left;
+    margin-bottom: 4px;
+    width: 930px;
+}       /* 菜单栏分组div样式 */
+
+.categoryItem1{
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}       /* 菜单栏选项css样式1 */
+
+.categoryItem2{
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}       /* 菜单栏选项css样式2 */
+/* 菜单栏css样式 */
+
+.middle_pic{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.goods_title{
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 10px;
+}           /* 商品类型 */
+
+.title{
+    display: inline-block;
+    margin-bottom: 0px;
+}       /* 商品类型文字样式 */
+
+.title_name{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 44px;
+}
+
+.explanation{
+    font-size: 14px;
+    color: #999;
+    line-height: 1.5;
+}     /* 商品类型说明 */
+
+.goods_shelf{
+    padding-top: 10px;
+    width: 84%;
+    padding-right: 30px;
+    align-self: center;
+    margin-bottom: 40px;
+}
+
+.goods{
+
+    margin: 0 8px;
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+    float: left;
+
+
+}
+
+.goods2{
+    display: flex;
+    flex-direction: column;
+}
+
+.pictrue{
+    width: 90%;
+    align-self: center;
+}
+
+.item_tag1{
+    align-self: center;
+    color: #333;
+    background: #b4a078;
+    padding: 5px;
+    margin: 1px;
+    font-size: 10px;
+
+}
+
+.item1{
+    align-self: center;
+    margin: 5px;
+}
+
+.item2 {
+    align-self: center;
+    color: red;
+
+}
+
+.item3 {
+    align-self: center;
+    color: darkgrey;
+}
+
+.item4{
+    border-bottom: 1px solid #e8e8e8;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.item_tag2{
+    align-self: center;
+    color: #333;
+    background: #e36844;
+    padding: 5px;
+    margin: 1px;
+    font-size: 10px;
+}

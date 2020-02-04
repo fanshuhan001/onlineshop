@@ -1,0 +1,121 @@
+@charset "utf-8";
+.div_weibu {
+    position: relative;
+    float: left;
+    margin-top: 2000px;
+    width: 100%;
+    height: 27%;
+    background: rgb(65, 65, 65);
+}
+
+.div_weibu_56 {
+    width: 100%;
+    height: 56%;
+}
+
+.div_weibu_44 {
+    width: 100%;
+    height: 44%;
+}
+
+.div_weibu_56_70 {
+    width: 70%;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid #4f4f4f;
+}
+
+.div_weibu_56_70_1 {
+    float: left;
+    width: 33%;
+    height: 100%;
+
+}
+
+.div_weibu_56_70_2 {
+    float: left;
+    width: 34%;
+    height: 100%;
+
+}
+
+.div_weibu_56_70_3 {
+    float: left;
+    width: 33%;
+    height: 100%;
+
+}
+
+.div_51_51_1 {
+    float: left;
+    width: 51px;
+    height: 51px;
+    background-image: url("../img/foot_index.png");
+    background-position: 0 -310px;
+}
+
+.div_130_51 {
+    float: left;
+    width: 130px;
+    height: 51px;
+}
+
+.tiaoweizhi {
+    width: 181px;
+    height: 51px;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+
+.h4_1 {
+    clear: both;
+    margin-top: 18px;
+}
+
+.div_51_51_2 {
+    float: left;
+    width: 51px;
+    height: 51px;
+    background-image: url("../img/foot_index.png");
+    background-position: 0 0px;
+}
+
+.div_51_51_3 {
+    float: left;
+    width: 51px;
+    height: 51px;
+    background-image: url("../img/foot_index.png");
+    background-position: 0 -135px;
+}
+
+.div_weibu_zhong {
+    width: 50%;
+    height: 16px;
+    margin: auto;
+    position: relative;
+    top: 20px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+    /*color: gray;*/
+
+}
+
+.div_weibu_zhong2 {
+    width: 47%;
+    height: 16px;
+    margin: auto;
+    position: relative;
+    top: 28px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: 12px
+
+}

@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>issue_page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static "css/user_center_last.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/center_head.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/user_center.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/layui/css/layui.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/issue_page.css" %}"/>
+</head>
+
+<body style="height: 200%">
+{#头部背景#}
+<div class="head_blue">
+    {#头部中部分70%#}
+    <div class="head_middle">
+        {#头部中间商标背景div#}
+        <div class="head_brand">
+            {#头部中间商标#}
+            <div>
+                <a class="head_brand_middle" href="#"></a>
+            </div>
+        </div>
+        {#头部首页#} <a id="home_page" href="index">HOME</a>
+        {#头部淘宝#} <a id="home_taobao" href="https://www.ebay.com/">Ebay</a>
+        {#头部拼多多#} <a id="home_pinduoduo" href="https://www.dealmoon.com/">Dealmoon</a>
+        <div id="home_blank" href="/"></div>
+        {% if nick_name == None %}
+            {#头部用户#} <a id="home_user" href="register">Register</a>
+            {#头部退出#} <a id="home_quit" href="login">Log in</a>
+        {% else %}
+            {#头部用户#} <a id="home_user" href="#">{{ nick_name }}</a>
+            {#头部退出#} <a id="home_quit" href="logout">Log out</a>
+        {% endif %}
+    </div>
+</div>
+{#上部导航栏发布二手物品#}
+<div class="issue_second_gooods_bg div_in_shuiping">
+    <div class="issue_second_gooods div_in_chuizhi">
+        <div class="bg_70 div_in_juzhong">
+            <a class="issue_second_gooods_white_text">
+                Sell My Used Item
+            </a>
+        </div>
+    </div>
+</div>
+<form class="layui-form" id="goods_form" enctype="multipart/form-data">
+
+    <div class="issue_big_bg_middle div_in_shuiping">
+        <div class="issue_big_bg div_in_juzhong">
+            <div class="with_90">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="action_show_goods" type="file" name="file_img">
+
+                <div class="issue_img_bg">
+                    <img id="img_show" src="{% static "img/1.JPG" %}">
+                </div>
+                {#               商品名称那一栏#}
+                <div class="layui-form-item input-line">
+                    <label class="layui-form-label">item's name</label>
+                    <div class="layui-input-inline" style="width: 390px;">
+                        <input id="goods_name" type="text" name="goods_name" autocomplete="off" placeholder="please input a name"
+                               class="layui-input goods-title">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">not longer than 28 characters</div>
+                </div>
+                {#商品详情那一栏#}
+                <div class="layui-form-item layui-form-text input-line">
+                    <label class="layui-form-label good-description">description</label>
+                    <div class="layui-input-block">
+                        <textarea id="goods_detal" name="goods_detail" placeholder="please describe your item in detail"
+                                  class="layui-textarea goods-des"></textarea>
+                    </div>
+                </div>
+                {#价格那一栏#}
+                <div class="layui-form-item input-line" id="price">
+                    <label class="layui-form-label">price</label>
+                    <div class="layui-input-inline">
+                        <input id="goods_price" type="text" name="goods_price" autocomplete="off" placeholder="price you want to sell"
+                               class="layui-input price">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">dollars　　　</div>
+                </div>
+                {#                分类那一栏#}
+                <div class="layui-form-item input-line">
+                    <label class="layui-form-label">category</label>
+                    <div class="layui-input-inline">
+                        <select name="category" id="category">
+                            <option value="">please select category</option>
+                            {#下拉选择默认属性#}
+                            <option data-cid="1" value="1" >Phone</option>
+
+                            <option data-cid="2" value="2">PC/Laptop</option>
+
+                            <option data-cid="4" value="4">Clothes</option>
+
+                            <option data-cid="5" value="5">Appliances</option>
+
+                            <option data-cid="6" value="6" selected="selected">Book</option>
+
+                            <option data-cid="7" value="7">Food</option>
+
+                            <option data-cid="8" value="8">Sport</option>
+
+                            <option data-cid="9" value="9">Others</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                {#                trade method#}
+
+                <div class="layui-form-item input-line">
+                    <label class="layui-form-label">trading method</label>
+                    <div class="layui-input-block">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="1" title="Delivery by seller">
+                        <div class="layui-unselect layui-form-radio"><i
+                                class="layui-anim layui-icon"></i><span>delivery by seller</span></div>
+                        <input type="radio" class="buyMethod" name="transactionMode" value="2" title="Pick up by buyer">
+                        <div class="layui-unselect layui-form-radio"><i
+                                class="layui-anim layui-icon"></i><span>Pick up by buyer</span></div>
+                        <input type="radio" class="buyMethod" name="transactionMode" value="3" title="Face-to-face transaction"
+                               checked="">
+                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i
+                                class="layui-anim layui-icon"></i><span>Face-to-face transaction</span></div>
+                    </div>
+                </div>
+
+                {#                contact info#}
+                <div class="layui-form-item input-line" id="phoneNumber">
+                    <label class="layui-form-label">Phone #</label>
+                    <div class="layui-input-inline">
+                        <input id="pho_num" type="text" name="pho_num" autocomplete="off" placeholder="Please input your phone #"
+                               class="layui-input phone-number">
+                    </div>
+                    <label class="layui-form-label">Email</label>
+                    <div class="layui-input-inline">
+                        <input type="email" name="email" autocomplete="off" placeholder="Please input you email"
+                               class="layui-input qq-number">
+                    </div>
+                </div>
+
+                <button type="button" onclick="issue()" class="layui-btn submit" id="button_act">ISSUE</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script src="{% static "js/jquery/jquery-3.3.1.min.js" %}"></script>
+<script src="{% static "css/layui/layui.js" %}"></script>
+<script>
+    $(function () {
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer
+                , form = layui.form;
+            form.render();
+        });
+        $("#action_show_goods").change(function () {
+            var $file = $(this);
+            var fileObj = $file[0];
+            var windowURL = window.URL || window.webkitURL;
+            var dataURL;
+            var $img = $("#img_show");
+            if (fileObj && fileObj.files && fileObj.files[0]) {
+                dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                $img.attr('src', dataURL);
+            } else {
+                dataURL = $file.val();
+                var imgObj = document.getElementById("preview");
+                // 两个坑:
+                // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+            }
+        });
+    });
+
+
+    function issue() {
+        var formData = new FormData($("#goods_form")[0]);
+
+        if ($("#goods_name").val() == "") {
+            layer.msg("please input item's name");
+            return;
+        }
+        var file_check = $("#file_img").val()
+        if (file_check == 0) {
+            layer.msg("please upload a picture of your item");
+            return;
+        }
+        if ($("#goods_price").val() == "") {
+            layer.msg("please input a price");
+            return;
+        }
+        if ($("#email").val() == "") {
+            layer.msg("please input your email#");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "issue_page",
+            {#上传表单#}
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if (data == 1) {
+                    layer.msg("success");
+
+                }
+                else if(data == 0) {
+                    layer.msg("fail to store data");
+                }
+            },
+            error: function () {
+                layer.msg("unknown error");
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>
