@@ -30,8 +30,8 @@
         {#头部拼多多#} <a id="home_pinduoduo" href="https://www.pinduoduo.com">拼多多</a>
         <div id="home_blank" href="/"></div>
         {% if nick_name == None %}
-            {#头部用户#} <a id="home_user" href="register_page">Sign in</a>
-            {#头部退出#} <a id="home_quit" href="login_page">Log in</a>
+            {#头部用户#} <a id="home_user" href="register">Sign in</a>
+            {#头部退出#} <a id="home_quit" href="login">Log in</a>
         {% else %}
             {#头部用户#} <a id="home_user" href="user_center">{{ nick_name }}</a>
             {#头部退出#} <a id="home_quit" href="logout">Log out</a>
@@ -47,7 +47,7 @@
                 <p>发布于：{{ goods_detail.create_time }}</p>
             </div>
             <div class="zuo_40">
-                <img src="{{ MEDIA_URL }}{{ goods_detail.img }}">
+                <img src="/media/img/{{ MEDIA_URL }}{{ goods_detail.img }}">
             </div>
             <div class="you_60">
                 <div class="basic_class div_in_chuizhi">
@@ -74,7 +74,7 @@
                 <div class="you_first div_in_chuizhi">
                     <p class="goods_text">contact</p>
                     <p class="deal_function">email:</p>
-                    <text>{{ goods_detail.master_qqnum }}</text>
+                    <text>{{ goods_detail.master_email }}</text>
                 </div>
 {#                <div class="you_first div_in_chuizhi">#}
 {#                    <p class="wechat_num">Phone #1:</p>#}
@@ -94,7 +94,7 @@
                 </div>
                 <div class="detal_bg div_in_juzhong">
                     <div class="detal_bg_middle">
-                        <text class="detal">{{ goods_detail.detal }}</text>
+                        <text class="detal">{{ goods_detail.detail }}</text>
                     </div>
 
                 </div>

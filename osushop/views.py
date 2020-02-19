@@ -1,18 +1,18 @@
 # from django.contrib.auth.models import User
+import json
+import logging
 import os
 import uuid
 
-from django.core.serializers import json
 from django.conf import settings
-from .models import *
 from django.contrib.auth.hashers import make_password, check_password
-from django.db import DataError, DatabaseError
+from django.db import DatabaseError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-import logging
 
-from django.contrib.auth import logout
+from .models import *
+
 
 # Create your views here.
 
@@ -176,16 +176,51 @@ def do_file_name(file_name):
     return str(uuid.uuid1()) + os.path.splitext(file_name)[1]
 
 
-def todetailpage(request):
-    return render(request, "good_detail_page.html")
+def togood_detail_page(request):
+    nick_name = request.session.get('nick_name')
+    id = request.GET.get('id')
+    print("id: " + id)
+    goods_detal = GoodsInfo.objects.get(id=id)
+    return render(request, "good_detail_page.html", {"goods_detail": goods_detal, "nick_name": nick_name})
 
 
-# def togood_detail_page(request):
-#     nick_name = request.session.get('nick_name')
-#     id = request.GET.get('id')
-#     print("id: " + id)
-#     goods_detal = Goods.objects.get(id=id)
-#     return render(request, "good_detail_page.html", {"goods_detail": goods_detal, "nick_name": nick_name})
+def search(request):
+    flag = 1
+    key = request.GET.get("key")
+    # print("key" + key)
+    nick_name = request.session.get('nick_name')
+    goods_list = GoodsInfo.objects.filter(name__contains=key).order_by('-create_time')
+    return render(request, 'index.html', {"goods_list": goods_list, "nick_name": nick_name})
 
 
+def search2(request):
+    flag = 1
+    key = request.GET.get("sort_id")
+    # print("key" + key)
+    nick_name = request.session.get('nick_name')
+    goods_list = GoodsInfo.objects.filter(sort_id=key).order_by('-create_time')
+    return render(request, 'index.html', {"goods_list": goods_list, "nick_name": nick_name})
 
+
+def join_cart(request):
+    result = 2
+    good_id = request.GET.get("id")
+
+    # good = Goods()
+    # good = Goods.objects.get(id=good_id)
+    # cart_check = Cart()
+    # cart_check = Cart.objects.get(goods=good)
+    # if cart_check is not None:
+    #     result = 2
+    #     return HttpResponse(json.dumps(result))
+    user_id = request.session.get('user_id')
+    print(user_id)
+    cart = CartInfo()
+    cart.user_id = user_id
+    cart.goods_id = good_id
+    try:
+        cart.save()
+    except Exception:
+        print(Exception)
+        result = 0
+    return HttpResponse(json.dumps(result))

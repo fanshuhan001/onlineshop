@@ -61,7 +61,7 @@
                     <input id="input_pass" type="text" placeholder="search by keywords" class="keywords">
                 </div>
                 <div class="r_blank">
-                    {#搜索#} <a id="sousuo" href="#" onclick="search_key()">search</a>
+                    {#搜索#} <a id="sousuo" href="javascript:;" onclick="search_key()">search</a>
                 </div>
             </div>
         </div>
@@ -78,40 +78,40 @@
 {#固定悬浮窗#}
 <div class="fixation_floating_bg">
     <div class="sort_bg">
-        <a class="sort" href="#">Phone</a>
-{#        <a class="sort" href="search?sort_id=1">Phone</a>#}
+
+        <a class="sort" href="search2?sort_id=1">Phone</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">PC/Laptop</a>
-{#        <a class="sort" href="search?sort_id=2">PC/Laptop</a>#}
+
+        <a class="sort" href="search2?sort_id=2">PC/Laptop</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Clothes</a>
-{#        <a class="sort" href="search?sort_id=3">Accessories</a>#}
+
+        <a class="sort" href="search2?sort_id=3">Accessories</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Appliances</a>
-{#        <a class="sort" href="search?sort_id=4">Foods</a>#}
+
+        <a class="sort" href="search2?sort_id=4">Foods</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Others</a>
-{#        <a class="sort" href="search?sort_id=5">Books</a>#}
+
+        <a class="sort" href="search2?sort_id=5">Books</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Books</a>
-{#        <a class="sort" href="search?sort_id=6">Cars</a>#}
+
+        <a class="sort" href="search2?sort_id=6">Cars</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Foods</a>
-{#        <a class="sort" href="search?sort_id=7">Sports</a>#}
+
+        <a class="sort" href="search2?sort_id=7">Sports</a>
     </div>
     <div class="sort_bg">
-        <a class="sort" href="#">Sports</a>
-{#        <a class="sort" href="search?sort_id=8">Others</a>#}
+
+        <a class="sort" href="search2?sort_id=8">Others</a>
     </div>
         <div class="sort_bg">
-        <a class="sort" href="#">Others</a>
-{#        <a class="sort" href="search?sort_id=8">Others</a>#}
+
+        <a class="sort" href="search2?sort_id=8">Others</a>
     </div>
 </div>
 
@@ -161,8 +161,8 @@
     {% for foo in goods_list %}
         <div class="l_1">
             <div class="l_1_70">
-                <a href="#"><img class="img_70" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}"></a>
-{#                <a href="good_detail_page?id={{ foo.id }}"><img class="img_70" src="{{ MEDIA_URL }}{{ foo.img }}"></a>#}
+{#                <a href="#"><img class="img_70" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}"></a>#}
+                <a href="good_detail?id={{ foo.id }}"><img class="img_70" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}"></a>
             </div>
             <div class="l_1_15_txt">
                 <a class="list_text" href="/">{{ foo.name }}</a>
@@ -178,7 +178,7 @@
 
      function search_key() {
          var key = $("#input_pass").val();
-         {#window.location.href = "search?key=" + key;#}
+         window.location.href = "search?key=" + key;
     }
 
 
