@@ -96,10 +96,13 @@ def login(request):
                 flag = -1
             if user is None:  # 用户名不存在
                 return HttpResponse(flag)
+
             if check_password(user_password, user.password):  # 密码相等，登录成功
                 flag = 1
                 request.session['nick_name'] = user.nick_name
                 request.session['user_id'] = user.id
+                request.session['myemail'] = user.email
+                request.session['myphone'] = user.phone_num
             else:  # 密码错误
                 flag = 2
             return HttpResponse(flag)
@@ -111,6 +114,8 @@ def workingon(request):
 def logout(request):
     del request.session["nick_name"]
     del request.session["user_id"]
+    del request.session["myemail"]
+    del request.session["myphone"]
     return HttpResponseRedirect("index")
 
 
@@ -224,3 +229,52 @@ def join_cart(request):
         print(Exception)
         result = 0
     return HttpResponse(json.dumps(result))
+
+@csrf_exempt
+def user_center(request):
+    nick_name = request.session.get('nick_name')
+    myphone = request.session.get('myphone')
+    myemail = request.session.get("myemail")
+    if request.method == 'POST':
+        flag = 0
+        user_id = request.session.get('user_id')
+        user = UserInfo.objects.get(id=user_id)
+        new_name = request.POST.get('new_name')
+        if new_name != '':
+            name_checker = UserInfo.objects.filter(nick_name=new_name)
+            if len(name_checker) > 0:
+                flag = 1
+                return HttpResponse(flag)
+            else:
+                user.nick_name = new_name
+
+        new_phone = request.POST.get('pho_num')
+        if new_phone != '':
+            user.phone_num = new_phone
+
+        new_email = request.POST.get('email')
+        if new_email != '':
+            user.email = new_email
+
+        new_psw1 = request.POST.get('password1')
+        if new_psw1 != '':
+            new_psw1 = make_password(new_psw1, 'abc', 'pbkdf2_sha1')
+            user.password = new_psw1
+
+        file_img = request.FILES.get('file_img')
+        if file_img != '':
+            pass
+
+        try:
+            user.save()
+            request.session['nick_name'] = user.nick_name
+            request.session['user_id'] = user.id
+            request.session['myemail'] = user.email
+            request.session['myphone'] = user.phone_num
+            flag = 2
+        except Exception as e:
+            print(e)
+        return HttpResponse(flag, {"nick_name": user.nick_name, "myphone": user.phone_num, "myemail": user.email})
+
+    return render(request, 'user_center.html', {"nick_name": nick_name, "myphone": myphone, "myemail": myemail})
+

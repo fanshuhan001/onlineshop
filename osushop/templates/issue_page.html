@@ -5,7 +5,7 @@
     <title>issue_page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static "css/user_center_last.css" %}"/>
+{#    <link rel="stylesheet" type="text/css" href="{% static "css/user_center_last.css" %}"/>#}
     <link rel="stylesheet" type="text/css" href="{% static "css/center_head.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/user_center.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/layui/css/layui.css" %}"/>
@@ -21,7 +21,7 @@
         <div class="head_brand">
             {#头部中间商标#}
             <div>
-                <a class="head_brand_middle" href="#"></a>
+                <a class="head_brand_middle" href="index"></a>
             </div>
         </div>
         {#头部首页#} <a id="home_page" href="index">HOME</a>
@@ -32,7 +32,7 @@
             {#头部用户#} <a id="home_user" href="register">Register</a>
             {#头部退出#} <a id="home_quit" href="login">Log in</a>
         {% else %}
-            {#头部用户#} <a id="home_user" href="#">{{ nick_name }}</a>
+            {#头部用户#} <a id="home_user" href="user_center">{{ nick_name }}</a>
             {#头部退出#} <a id="home_quit" href="logout">Log out</a>
         {% endif %}
     </div>
@@ -47,6 +47,7 @@
         </div>
     </div>
 </div>
+
 <form class="layui-form" id="goods_form" enctype="multipart/form-data">
 
     <div class="issue_big_bg_middle div_in_shuiping">

@@ -1,4 +1,6 @@
 {% load static %}
+{#{% load media %}#}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +37,7 @@
             {#头部用户#} <a id="home_user" href="register">Register</a>
             {#头部退出#} <a id="home_quit" href="login">Log in</a>
         {% else %}
-            {#头部用户#} <a id="home_user" href="#">{{ nick_name }}</a>
+            {#头部用户#} <a id="home_user" href="user_center">{{ nick_name }}</a>
             {#头部退出#} <a id="home_quit" href="logout">Log out</a>
         {% endif %}
     </div>
