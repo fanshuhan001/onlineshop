@@ -49,3 +49,6 @@ class SortInfo(models.Model):
     sort_name = models.CharField(max_length=255)
     create_time = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now=True)
+
+
+

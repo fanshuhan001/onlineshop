@@ -26,8 +26,8 @@
             </div>
         </div>
         {#头部首页#} <a id="home_page" href="index">HOME</a>
-        {#头部淘宝#} <a id="home_taobao" href="https://www.tmall.com/">淘宝</a>
-        {#头部拼多多#} <a id="home_pinduoduo" href="https://www.pinduoduo.com">拼多多</a>
+        {#头部淘宝#} <a id="home_taobao" href="https://www.ebay.com/">Ebay</a>
+        {#头部拼多多#} <a id="home_pinduoduo" href="https://www.dealmoon.com/">Dealmoon</a>
         <div id="home_blank" href="/"></div>
         {% if nick_name == None %}
             {#头部用户#} <a id="home_user" href="register">Sign in</a>
@@ -76,10 +76,7 @@
                     <p class="deal_function">email:</p>
                     <text>{{ goods_detail.master_email }}</text>
                 </div>
-{#                <div class="you_first div_in_chuizhi">#}
-{#                    <p class="wechat_num">Phone #1:</p>#}
-{#                    <text>{{ goods_detail.master_wechatnum }}</text>#}
-{#                </div>#}
+
                 <div class="you_first div_in_chuizhi">
                     <p class="wechat_num">Phone #:</p>
                     <text>{{ goods_detail.master_pho }}</text>
@@ -114,20 +111,29 @@
             dataType: "json",
             success: function (data) {
                 if (data == 1) {   //询问框
-                    layer.confirm('added to cart', {
-                        btn: ['finish', 'cancel'] //按钮
-                    }, function () {
-                        window.location.href = "user_center";
-                    }, function () {
-
-                    });
+                    layer.msg("please login first!");
                 }
                 if (data == 2) {
-                     layer.msg("Added to cart successfully!");
+                     layer.msg("This item already exist in your cart!", function () {
+                        window.location.href = "user_center";
+                    });
+                }
+                if (data == 3) {
+                    layer.msg("Added to cart successfully!", function () {
+                        window.location.href = "user_center";
+                    });
+                }
+                if (data == 4) {
+                     layer.msg("system error");
+                }
+                if (data == 5) {
+                      layer.msg("This item was posted by yourself", function () {
+                        window.location.href = "user_center";
+                    });
                 }
             },
             error: function () {
-                layer.msg("未知错误");
+                layer.msg("error!");
             }
         });
 

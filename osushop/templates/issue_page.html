@@ -91,21 +91,23 @@
                         <select name="category" id="category">
                             <option value="">please select category</option>
                             {#下拉选择默认属性#}
-                            <option data-cid="1" value="1" >Phone</option>
+                            <option data-cid="1" value=1 selected="selected">Phone</option>
 
-                            <option data-cid="2" value="2">PC/Laptop</option>
+                            <option data-cid="2" value=2>PC/Laptop</option>
 
-                            <option data-cid="4" value="4">Clothes</option>
+                            <option data-cid="3" value=3>Accessories</option>
 
-                            <option data-cid="5" value="5">Appliances</option>
+                            <option data-cid="4" value=4>Foods</option>
 
-                            <option data-cid="6" value="6" selected="selected">Book</option>
+                            <option data-cid="5" value=5>Books</option>
 
-                            <option data-cid="7" value="7">Food</option>
+                            <option data-cid="6" value=6 >Cars</option>
 
-                            <option data-cid="8" value="8">Sport</option>
+                            <option data-cid="7" value=7>Sports</option>
 
-                            <option data-cid="9" value="9">Others</option>
+                            <option data-cid="8" value=8>Clothes</option>
+
+                            <option data-cid="9" value=9>Others</option>
 
                         </select>
                     </div>
@@ -116,14 +118,13 @@
                 <div class="layui-form-item input-line">
                     <label class="layui-form-label">trading method</label>
                     <div class="layui-input-block">
-                        <input type="radio" class="buyMethod" name="transactionMode" value="1" title="Delivery by seller">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="1" title="Delivery by seller" checked="">
                         <div class="layui-unselect layui-form-radio"><i
                                 class="layui-anim layui-icon"></i><span>delivery by seller</span></div>
                         <input type="radio" class="buyMethod" name="transactionMode" value="2" title="Pick up by buyer">
                         <div class="layui-unselect layui-form-radio"><i
                                 class="layui-anim layui-icon"></i><span>Pick up by buyer</span></div>
-                        <input type="radio" class="buyMethod" name="transactionMode" value="3" title="Face-to-face transaction"
-                               checked="">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="3" title="Face-to-face transaction">
                         <div class="layui-unselect layui-form-radio layui-form-radioed"><i
                                 class="layui-anim layui-icon"></i><span>Face-to-face transaction</span></div>
                     </div>
@@ -133,12 +134,12 @@
                 <div class="layui-form-item input-line" id="phoneNumber">
                     <label class="layui-form-label">Phone #</label>
                     <div class="layui-input-inline">
-                        <input id="pho_num" type="text" name="pho_num" autocomplete="off" placeholder="Please input your phone #"
+                        <input id="pho_num" type="text" name="pho_num" autocomplete="off" placeholder="{{myphone}}"
                                class="layui-input phone-number">
                     </div>
                     <label class="layui-form-label">Email</label>
                     <div class="layui-input-inline">
-                        <input type="email" name="email" autocomplete="off" placeholder="Please input you email"
+                        <input type="email" name="email" autocomplete="off" placeholder="{{myemail}}"
                                class="layui-input qq-number">
                     </div>
                 </div>
@@ -199,10 +200,6 @@
             layer.msg("please input a price");
             return;
         }
-        if ($("#email").val() == "") {
-            layer.msg("please input your email#");
-            return;
-        }
 
         $.ajax({
             type: "POST",
@@ -214,12 +211,14 @@
             contentType: false,
             success: function (data) {
                 console.log(data);
-                if (data == 1) {
-                    layer.msg("success");
+                if (data == 2) {
+                    layer.msg("please login first!");
 
                 }
-                else if(data == 0) {
-                    layer.msg("fail to store data");
+                else if(data == 1) {
+                    layer.msg("success!", function () {
+                        location.href = "index";
+                    });
                 }
             },
             error: function () {

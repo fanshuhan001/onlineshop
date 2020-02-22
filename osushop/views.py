@@ -109,7 +109,7 @@ def login(request):
     return render(request, 'login.html')
 
 def workingon(request):
-    return  render(request, "workingon.html")
+    return render(request, "workingon.html")
 
 def logout(request):
     del request.session["nick_name"]
@@ -123,25 +123,32 @@ def logout(request):
 def issue_form(request):
     flag = 0
     nick_name = request.session.get('nick_name')
+    user_id = request.session.get('user_id')
+    phone_num = request.session.get('myphone')
+    default_email = request.session.get('myemail')
+
     if request.method == "POST":
         # 里面的参数是name
+        if user_id is None:
+            flag = 2
+            return HttpResponse(flag)
         goods_name = request.POST.get("goods_name")
-        print(goods_name)
         goods_detail = request.POST.get("goods_detail")
-        print(goods_detail)
         goods_price = request.POST.get("goods_price")
-        print(goods_price)
         category = request.POST.get("category")
-        print(category)
         transactionMode = request.POST.get("transactionMode")
-        print(transactionMode)
+
         pho_num = request.POST.get("pho_num")
-        print(pho_num)
+        if pho_num == '':
+            pho_num = phone_num
+
         email = request.POST.get("email")
-        print(email)
+        if email == '':
+            email = default_email
+
         file_img = request.FILES.get('file_img')
-        print(file_img.name)
-        print(file_img.size)
+
+
         file_chunks = file_img.chunks()
         # 文件保存的路径
         # /images/qwyuqguweuq.jpg
@@ -162,8 +169,10 @@ def issue_form(request):
         # new_issue.user_id = UserInfo.objects.get(id=user_id)
         # sort = SortInfo.objects.get(id=category)
         # print(sort.__dict__)
-        new_issue.sort_id = category
+        new_issue.sort_id = SortInfo.objects.get(id=category)
+
         new_issue.img = file_name
+        new_issue.user_id = UserInfo.objects.get(id=user_id)
         try:
             new_issue.save()
             with open(file_path, "wb")as file:
@@ -173,7 +182,7 @@ def issue_form(request):
         except Exception as e:
             print(e)
         return HttpResponse(flag)
-    return render(request, "issue_page.html", {"nick_name": nick_name})
+    return render(request, "issue_page.html", {"nick_name": nick_name, "user_id": user_id, "myphone": phone_num, "myemail": default_email})
 
 
 # generate different pic name
@@ -208,36 +217,52 @@ def search2(request):
 
 
 def join_cart(request):
-    result = 2
+    flag = 0
     good_id = request.GET.get("id")
-
-    # good = Goods()
-    # good = Goods.objects.get(id=good_id)
-    # cart_check = Cart()
-    # cart_check = Cart.objects.get(goods=good)
-    # if cart_check is not None:
-    #     result = 2
-    #     return HttpResponse(json.dumps(result))
     user_id = request.session.get('user_id')
-    print(user_id)
+    if user_id == '':
+        flag = 1
+        return HttpResponse(flag)
+    # 查询当前用户和商品
+    current_user = UserInfo.objects.get(id=user_id)
+    current_good = GoodsInfo.objects.get(id=good_id)
+    # 如果该商品是该用户发布的，则不能自己购买
+    if current_good.user_id == current_user:
+        flag = 5
+        return HttpResponse(flag)
+    # 判断当前物品是否已经在该用户购物车中，如果是，则不再重复加入
+    # CartInfo.objects.filter(Q(goods_id=current_good) & Q(user_id=current_user))
+    if CartInfo.objects.filter(goods_id=current_good, user_id=current_user).exists():
+        flag = 2
+        return HttpResponse(flag)
+    # 满足添加条件，更新购物车数据
     cart = CartInfo()
-    cart.user_id = user_id
-    cart.goods_id = good_id
+    cart.user_id = current_user
+    cart.goods_id = current_good
     try:
         cart.save()
-    except Exception:
-        print(Exception)
-        result = 0
-    return HttpResponse(json.dumps(result))
+        flag = 3
+    except Exception as e:
+        print(e)
+        flag = 4
+    return HttpResponse(json.dumps(flag))
+
 
 @csrf_exempt
 def user_center(request):
     nick_name = request.session.get('nick_name')
     myphone = request.session.get('myphone')
     myemail = request.session.get("myemail")
+    user_id = request.session.get('user_id')
+
+    user_cart = GoodsInfo.objects.filter(cartinfo__user_id=user_id)
+    for foo in user_cart:
+        print(foo.name)
+    # user_cart = CartInfo.objects.filter(user_id=UserInfo.objects.get(id=user_id))
+    # cart_detail =
+
     if request.method == 'POST':
         flag = 0
-        user_id = request.session.get('user_id')
         user = UserInfo.objects.get(id=user_id)
         new_name = request.POST.get('new_name')
         if new_name != '':
@@ -276,5 +301,6 @@ def user_center(request):
             print(e)
         return HttpResponse(flag, {"nick_name": user.nick_name, "myphone": user.phone_num, "myemail": user.email})
 
-    return render(request, 'user_center.html', {"nick_name": nick_name, "myphone": myphone, "myemail": myemail})
+    return render(request, 'user_center.html', {"nick_name": nick_name, "myphone": myphone,
+                                                "myemail": myemail, "cart_list": user_cart})
 
