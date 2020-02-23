@@ -111,32 +111,29 @@
             dataType: "json",
             success: function (data) {
                 if (data == 1) {   //询问框
-                    layer.msg("please login first!");
+                    layer.msg("please login first!", {time : 2000});
                 }
                 if (data == 2) {
-                     layer.msg("This item already exist in your cart!", function () {
+                     layer.msg("This item already exist in your cart!", {time : 1000}, function () {
                         window.location.href = "user_center";
                     });
                 }
                 if (data == 3) {
-                    layer.msg("Added to cart successfully!", function () {
+                    layer.msg("Added to cart successfully!", {time : 1000}, function () {
                         window.location.href = "user_center";
                     });
                 }
                 if (data == 4) {
-                     layer.msg("system error");
+                     layer.msg("system error", {time : 2000});
                 }
                 if (data == 5) {
-                      layer.msg("This item was posted by yourself", function () {
-                        window.location.href = "user_center";
-                    });
+                      layer.msg("This item was posted by yourself", {time : 2000});
                 }
             },
             error: function () {
-                layer.msg("error!");
+                layer.msg("error!", {time : 2000});
             }
         });
-
     }
 
 </script>

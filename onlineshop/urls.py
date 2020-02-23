@@ -35,6 +35,9 @@ urlpatterns = [
     path('search2', osushop.views.search2),
     path('join_cart', osushop.views.join_cart),
     path('user_center', osushop.views.user_center),
+    path('del_good', osushop.views.del_goods),
+    path('del_cart', osushop.views.del_cart),
+    path('modify_good', osushop.views.modify),
     # re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

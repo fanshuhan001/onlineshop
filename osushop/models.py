@@ -8,7 +8,7 @@ from django.db import models
 class GoodsInfo(models.Model):
     # db_table = 'goods'
     id = models.AutoField(primary_key=True)
-    img = models.CharField(max_length=255)
+    img = models.FileField(max_length=255)
     sort_id = models.ForeignKey('SortInfo', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     detail = models.TextField(max_length=255, blank=True, default="no more description for this item now")

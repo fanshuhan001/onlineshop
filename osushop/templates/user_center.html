@@ -147,19 +147,27 @@
                </div>
             </div>
 
-{#             show 2#}
+{#             show 2 购物车#}
             <div class="layui-tab-item">
-                <div class="big_bg">
+                <div class="tiaozheng">
+                    {% if cart_list is None %}
+
+                    {% endif %}
 
                     {% for foo in cart_list %}
                         <div class="show_1_1">
-                            <div class="tou_20 div_in_chuizhi">
-                                <a>{{ foo.creat_time}}</a>
+                            <div class="shang_10 div_in_chuizhi">
+                                <p>Posted on：{{ foo.create_time }}</p>
                             </div>
+{#                            <div class="tou_20 div_in_chuizhi">#}
+{#                                <a>{{ foo.creat_time}}</a>#}
+{#                            </div>#}
 
                             <div class="last_zuo div_in_juzhong">
                                 <div >
-                                    <img height="100" width="100" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
+                                     <a href="good_detail?id={{ foo.id }}">
+                                        <img height="150" width="150" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
+                                     </a>
                                 </div>
                             </div>
 
@@ -175,9 +183,7 @@
                             </div>
 
                             <div class="last_you div_in_juzhong">
-                                <button class="del_buttun2" onclick="buy_good({{ foo.id }})" style="cursor:pointer">立刻购买
-                                </button>
-                                <button class="del_buttun" onclick="del_cart({{ foo.id }})" style="cursor:pointer">删除
+                                <button class="del_buttun" onclick="del_cart({{ foo.id }})" style="cursor:pointer">remove
                                 </button>
                             </div>
                         </div>
@@ -185,10 +191,42 @@
                 </div>
             </div>
 
-{#             show 3#}
+{#             show 3 selling list#}
             <div class="layui-tab-item">
                 <div class="big_bg">
-                    test
+                    {% for foo in selling_list %}
+                        <div class="show_1_1">
+                            <div class="tou_20 div_in_chuizhi">
+                                <h2>{{ foo.creat_time}}</h2>
+                            </div>
+
+                            <div class="last_zuo div_in_juzhong">
+                                <div >
+                                    <a href="good_detail?id={{ foo.id }}">
+                                        <img height="50" width="50" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="last_middle">
+                                <div class="last_middle_1">
+                                    <h2>{{ foo.name }}</h2>
+                                </div>
+
+                                <div class="last_middle_2">
+                                    <h2 style="float: left">$</h2>
+                                    <div class="jiage">{{ foo.price }}</div>
+                                </div>
+                            </div>
+
+                            <div class="last_you div_in_juzhong">
+                                <button class="del_buttun2" onclick="modify_goods({{ foo.id }})" style="cursor:pointer">Edit
+                                </button>
+                                <button class="del_buttun2" onclick="del_good({{ foo.id }})" style="cursor:pointer">Delete
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 {#             show 4#}
@@ -226,8 +264,6 @@
                 return;
             }
         }
-
-
         $.ajax({
             type: "POST",
             url: "user_center",
@@ -250,6 +286,66 @@
             }
         });
     }
+
+    function del_good(id) {
+        //询问框
+        layer.confirm('Do you want to delete it？Others will not see it anymore.', {
+            btn: ['Yes', 'No'] //按钮
+        }, function () {
+            $.ajax({
+                url: "del_good",
+                type: "GET",
+                data: {"id": id},
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data == 1) {
+                        window.location.reload();
+                    }
+                    if (data == 0) {
+                        layer.msg("system error!");
+                    }
+                },
+                error: function () {
+                    layer.msg("error");
+                }
+            })
+        }, function () {
+        });
+    }
+
+    function del_cart(id) {
+        layer.confirm('Do you want to remove it from your cart?', {
+                        btn: ['Yes', 'No'] //按钮
+                    }, function () {
+                        $.ajax({
+                            url: "del_cart",
+                            type: "GET",
+                            data: {"id": id},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data == 1) {   //询问框
+                                    window.location.reload();
+                                }
+                                if (data == 0) {
+                                    layer.msg("system error!");
+                                }
+                            },
+                            error: function () {
+                                layer.msg("error!");
+                            }
+                        });
+
+                    }, function () {
+
+                    });
+
+    }
+
+    function modify_goods(id){
+	    window.location.href='modify_good?id='+id
+    }
+
 
 
 

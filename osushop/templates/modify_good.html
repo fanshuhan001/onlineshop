@@ -42,7 +42,7 @@
     <div class="issue_second_gooods div_in_chuizhi">
         <div class="bg_70 div_in_juzhong">
             <a class="issue_second_gooods_white_text">
-                Sell My Used Item
+                Modify Goods' Information
             </a>
         </div>
     </div>
@@ -56,16 +56,19 @@
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="action_show_goods" type="file" name="file_img">
 
                 <div class="issue_img_bg">
-                    <img id="img_show" src="{% static "img/1.JPG" %}">
+                    <img id="img_show"  src="/media/img/{{ MEDIA_URL }}{{ current_goods.img }}">
+{#                    <img id="img_show" src="{% static "img/1.JPG" %}">#}
                 </div>
+
+                {# 商品ID #}
+                        <input type="hidden" name="goods_id" value="{{current_goods.id}}">
+
+
                 {#               商品名称那一栏#}
-                <div class="layui-form-item input-line">
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<font color="red">Please log in before you post an item!</font>
-                </div>
                 <div class="layui-form-item input-line">
                     <label class="layui-form-label">item's name</label>
                     <div class="layui-input-inline" style="width: 390px;">
-                        <input id="goods_name" type="text" name="goods_name" autocomplete="off" placeholder="please input a name"
+                        <input id="goods_name" type="text" name="goods_name" autocomplete="off" placeholder="{{current_goods.name}}"
                                class="layui-input goods-title">
                     </div>
                     <div class="layui-form-mid layui-word-aux">not longer than 28 characters</div>
@@ -74,7 +77,7 @@
                 <div class="layui-form-item layui-form-text input-line">
                     <label class="layui-form-label good-description">description</label>
                     <div class="layui-input-block">
-                        <textarea id="goods_detal" name="goods_detail" placeholder="please describe your item in detail"
+                        <textarea id="goods_detal" name="goods_detail" placeholder="{{current_goods.detail}}"
                                   class="layui-textarea goods-des"></textarea>
                     </div>
                 </div>
@@ -82,7 +85,7 @@
                 <div class="layui-form-item input-line" id="price">
                     <label class="layui-form-label">price</label>
                     <div class="layui-input-inline">
-                        <input id="goods_price" type="text" name="goods_price" autocomplete="off" placeholder="price you want to sell"
+                        <input id="goods_price" type="text" name="goods_price" autocomplete="off" placeholder="{{current_goods.price}}"
                                class="layui-input price">
                     </div>
                     <div class="layui-form-mid layui-word-aux">dollars　　　</div>
@@ -94,23 +97,23 @@
                         <select name="category" id="category">
                             <option value="">please select category</option>
                             {#下拉选择默认属性#}
-                            <option data-cid="1" value=1 selected="selected">Phone</option>
+                            <option data-cid="1" value=1 {% if current_goods.sort_id_id == 1 %} selected="selected" {% endif %}>Phone</option>
 
-                            <option data-cid="2" value=2>PC/Laptop</option>
+                            <option data-cid="2" value=2 {% if current_goods.sort_id_id == 2 %} selected="selected" {% endif %}>PC/Laptop</option>
 
-                            <option data-cid="3" value=3>Accessories</option>
+                            <option data-cid="3" value=3 {% if current_goods.sort_id_id == 3 %} selected="selected" {% endif %}>Accessories</option>
 
-                            <option data-cid="4" value=4>Foods</option>
+                            <option data-cid="4" value=4 {% if current_goods.sort_id_id == 4 %} selected="selected" {% endif %}>Foods</option>
 
-                            <option data-cid="5" value=5>Books</option>
+                            <option data-cid="5" value=5 {% if current_goods.sort_id_id == 5 %} selected="selected" {% endif %}>Books</option>
 
-                            <option data-cid="6" value=6 >Cars</option>
+                            <option data-cid="6" value=6 {% if current_goods.sort_id_id == 6 %} selected="selected" {% endif %}>Cars</option>
 
-                            <option data-cid="7" value=7>Sports</option>
+                            <option data-cid="7" value=7 {% if current_goods.sort_id_id == 7 %} selected="selected" {% endif %}>Sports</option>
 
-                            <option data-cid="8" value=8>Clothes</option>
+                            <option data-cid="8" value=8 {% if current_goods.sort_id_id == 8 %} selected="selected" {% endif %}>Clothes</option>
 
-                            <option data-cid="9" value=9>Others</option>
+                            <option data-cid="9" value=9 {% if current_goods.sort_id_id == 9 %} selected="selected" {% endif %}>Others</option>
 
                         </select>
                     </div>
@@ -121,13 +124,16 @@
                 <div class="layui-form-item input-line">
                     <label class="layui-form-label">trading method</label>
                     <div class="layui-input-block">
-                        <input type="radio" class="buyMethod" name="transactionMode" value="1" title="Delivery by seller" checked="">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="1" title="Delivery by seller"
+                                {% if current_goods.trading == 1 %} checked="" {% endif %}>
                         <div class="layui-unselect layui-form-radio"><i
                                 class="layui-anim layui-icon"></i><span>delivery by seller</span></div>
-                        <input type="radio" class="buyMethod" name="transactionMode" value="2" title="Pick up by buyer">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="2" title="Pick up by buyer"
+                                {% if current_goods.trading == 2 %} checked= {% endif %}>
                         <div class="layui-unselect layui-form-radio"><i
                                 class="layui-anim layui-icon"></i><span>Pick up by buyer</span></div>
-                        <input type="radio" class="buyMethod" name="transactionMode" value="3" title="Face-to-face transaction">
+                        <input type="radio" class="buyMethod" name="transactionMode" value="3" title="Face-to-face transaction"
+                                {% if current_goods.trading == 3 %}  checked= {% endif %}>
                         <div class="layui-unselect layui-form-radio layui-form-radioed"><i
                                 class="layui-anim layui-icon"></i><span>Face-to-face transaction</span></div>
                     </div>
@@ -137,17 +143,17 @@
                 <div class="layui-form-item input-line" id="phoneNumber">
                     <label class="layui-form-label">Phone #</label>
                     <div class="layui-input-inline">
-                        <input id="pho_num" type="text" name="pho_num" autocomplete="off" placeholder="{{myphone}}"
+                        <input id="pho_num" type="text" name="pho_num" autocomplete="off" placeholder="{{current_goods.master_pho}}"
                                class="layui-input phone-number">
                     </div>
                     <label class="layui-form-label">Email</label>
                     <div class="layui-input-inline">
-                        <input type="email" name="email" autocomplete="off" placeholder="{{myemail}}"
+                        <input type="email" name="email" autocomplete="off" placeholder="{{current_goods.master_email}}"
                                class="layui-input qq-number">
                     </div>
                 </div>
 
-                <button type="button" onclick="issue()" class="layui-btn submit" id="button_act">ISSUE</button>
+                <button type="button" onclick="update()" class="layui-btn submit" id="button_act">UPDATE</button>
 
             </div>
         </div>
@@ -162,7 +168,7 @@
         layui.use(['layer', 'form'], function () {
             var layer = layui.layer
                 , form = layui.form;
-            form.render();
+            {#form.render();#}
         });
         $("#action_show_goods").change(function () {
             var $file = $(this);
@@ -187,26 +193,11 @@
     });
 
 
-    function issue() {
+    function update() {
         var formData = new FormData($("#goods_form")[0]);
-
-        if ($("#goods_name").val() == "") {
-            layer.msg("please input item's name");
-            return;
-        }
-        var file_check = $("#file_img").val()
-        if (file_check == 0) {
-            layer.msg("please upload a picture of your item");
-            return;
-        }
-        if ($("#goods_price").val() == "") {
-            layer.msg("please input a price");
-            return;
-        }
-
         $.ajax({
             type: "POST",
-            url: "issue_page",
+            url: "modify_good",
             {#上传表单#}
             data: formData,
             dataType: "json",
@@ -215,12 +206,12 @@
             success: function (data) {
                 console.log(data);
                 if (data == 2) {
-                    layer.msg("please login first!");
+                    layer.msg("please login first!", {time : 2000});
 
                 }
                 else if(data == 1) {
-                    layer.msg("success!",{time : 1000}, function () {
-                        location.href = "index";
+                    layer.msg("success!", {time : 1000},function () {
+                        location.href = "user_center";
                     });
                 }
             },

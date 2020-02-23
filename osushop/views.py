@@ -194,8 +194,8 @@ def togood_detail_page(request):
     nick_name = request.session.get('nick_name')
     id = request.GET.get('id')
     print("id: " + id)
-    goods_detal = GoodsInfo.objects.get(id=id)
-    return render(request, "good_detail_page.html", {"goods_detail": goods_detal, "nick_name": nick_name})
+    goods_detail = GoodsInfo.objects.get(id=id)
+    return render(request, "good_detail_page.html", {"goods_detail": goods_detail, "nick_name": nick_name})
 
 
 def search(request):
@@ -220,7 +220,8 @@ def join_cart(request):
     flag = 0
     good_id = request.GET.get("id")
     user_id = request.session.get('user_id')
-    if user_id == '':
+    print(user_id)
+    if user_id is None:
         flag = 1
         return HttpResponse(flag)
     # 查询当前用户和商品
@@ -254,13 +255,14 @@ def user_center(request):
     myphone = request.session.get('myphone')
     myemail = request.session.get("myemail")
     user_id = request.session.get('user_id')
-
+    # 该用户的购物车
     user_cart = GoodsInfo.objects.filter(cartinfo__user_id=user_id)
-    for foo in user_cart:
-        print(foo.name)
+    # 该用户发布的商品列表
+    selling_list = GoodsInfo.objects.filter(user_id=user_id)
+
     # user_cart = CartInfo.objects.filter(user_id=UserInfo.objects.get(id=user_id))
     # cart_detail =
-
+    # 修改个人信息
     if request.method == 'POST':
         flag = 0
         user = UserInfo.objects.get(id=user_id)
@@ -302,5 +304,98 @@ def user_center(request):
         return HttpResponse(flag, {"nick_name": user.nick_name, "myphone": user.phone_num, "myemail": user.email})
 
     return render(request, 'user_center.html', {"nick_name": nick_name, "myphone": myphone,
-                                                "myemail": myemail, "cart_list": user_cart})
+                                                "myemail": myemail, "cart_list": user_cart, "selling_list": selling_list})
 
+
+def del_goods(request):
+    flag = 1
+    good_id = request.GET.get("id")
+    try:
+        GoodsInfo.objects.filter(id=good_id).delete()
+    except Exception as e:
+        print(e)
+        flag = 0
+    return HttpResponse(json.dumps(flag))
+
+
+def del_cart(request):
+    flag = 1
+    good_id = request.GET.get("id")
+    current_user = request.session.get('user_id')
+    try:
+        CartInfo.objects.filter(goods_id=good_id, user_id=current_user).delete()
+    except Exception as e:
+        print(e)
+        flag = 0
+    return HttpResponse(json.dumps(flag))
+
+
+@csrf_exempt
+def modify(request):
+    flag = 0
+    nick_name = request.session.get('nick_name')
+    user_id = request.session.get('user_id')
+
+    if request.method == "GET":
+        goods_id = request.GET.get('id')
+        print(goods_id)
+        current_goods = GoodsInfo.objects.get(id=goods_id)
+
+    if request.method == "POST":
+        # 里面的参数是name
+        if user_id is None:
+            flag = 2
+            return HttpResponse(flag)
+        g_id = request.POST.get('goods_id')
+        print("g_id: ", g_id)
+        current_goods = GoodsInfo.objects.get(id=g_id)
+        #
+        # goods_info = GoodsInfo()
+
+        goods_name = request.POST.get("goods_name")
+        if goods_name != '':
+            current_goods.name = goods_name
+
+        goods_detail = request.POST.get("goods_detail")
+        if goods_detail != '':
+            current_goods.detail = goods_detail
+
+        goods_price = request.POST.get("goods_price")
+        if goods_price != '':
+            current_goods.price = goods_price
+
+        category = request.POST.get("category")
+        current_goods.sort_id_id = category
+        transaction_mode = request.POST.get("transactionMode")
+        current_goods.trading = transaction_mode
+
+        email = request.POST.get("email")
+        if email != '':
+            current_goods.master_email = email
+
+        pho_num = request.POST.get("pho_num")
+        if pho_num != '':
+            current_goods.master_pho = pho_num
+
+        file_img = request.FILES.get('file_img')
+        print("img:", file_img)
+        if file_img is not None:
+            file_chunks = file_img.chunks()
+            # 文件保存的路径
+            # /images/qwyuqguweuq.jpg
+            file_name = do_file_name(file_img.name)
+            # 完整的路径
+            store_path = os.path.join(settings.MEDIA_ROOT, "img")
+            file_path = os.path.join(store_path, file_name).replace('\\', '/')
+            current_goods.img = file_name
+            with open(file_path, "wb")as file:
+                for chunk in file_chunks:
+                    file.write(chunk)
+        try:
+            current_goods.save()
+            flag = 1
+        except Exception as e:
+            print(e)
+        return HttpResponse(flag)
+    return render(request, "modify_good.html", {"nick_name": nick_name,
+                                                "user_id": user_id, "current_goods": current_goods, 'g_id': goods_id})
