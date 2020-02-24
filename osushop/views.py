@@ -192,9 +192,14 @@ def do_file_name(file_name):
 
 def togood_detail_page(request):
     nick_name = request.session.get('nick_name')
+    user_id = request.session.get('user_id')
+
     id = request.GET.get('id')
-    print("id: " + id)
     goods_detail = GoodsInfo.objects.get(id=id)
+
+    if user_id != goods_detail.user_id_id:
+        view_time = goods_detail.view_times + 1
+        GoodsInfo.objects.filter(id=id).update(view_times=view_time)
     return render(request, "good_detail_page.html", {"goods_detail": goods_detail, "nick_name": nick_name})
 
 
@@ -257,6 +262,7 @@ def user_center(request):
     user_id = request.session.get('user_id')
     # 该用户的购物车
     user_cart = GoodsInfo.objects.filter(cartinfo__user_id=user_id)
+    print(user_cart)
     # 该用户发布的商品列表
     selling_list = GoodsInfo.objects.filter(user_id=user_id)
 

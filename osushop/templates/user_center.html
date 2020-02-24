@@ -83,7 +83,7 @@
                     <li id="sl" class="layui-this">My Profile</li>
                     <li id="mycart" >My Cart</li>
                     <li id="myinfo" >My Selling List</li>
-                    <li id="idk">IDK</li>
+                    <li id="idk">Contact Manager</li>
                 </ul>
             </div>
         </div>
@@ -96,10 +96,10 @@
                        <div class="issue_big_bg_middle div_in_shuiping">
                            <div class="issue_big_bg div_in_juzhong">
                                <div class="with_90">
-                                   <input id="action_show_goods" type="file" name="file_img">
-                                   <div class="issue_img_bg">
-                                       <img id="img_show" src="{% static "img/1.JPG" %}">
-                                   </div>
+{#                                   <input id="action_show_goods" type="file" name="file_img">#}
+{#                                   <div class="issue_img_bg">#}
+{#                                       <img id="img_show" src="{% static "img/1.JPG" %}">#}
+{#                                   </div>#}
 
                                    <div class="layui-form-item input-line">
                                        <label class="layui-form-label">nick name</label>
@@ -148,25 +148,31 @@
             </div>
 
 {#             show 2 购物车#}
-            <div class="layui-tab-item">
-                <div class="tiaozheng">
-                    {% if cart_list is None %}
 
+            <div class="layui-tab-item">
+                <div class="big_bg">
+
+                    {% if cart_list == Null %}
+                         <div class="show_1_1">
+                            <div class="tou_20 div_in_chuizhi">
+                                <p1>There is no item in your cart.</p1>
+                            </div>
+                         </div>
                     {% endif %}
 
                     {% for foo in cart_list %}
+{#                        <div class="tiaozheng">#}
                         <div class="show_1_1">
-                            <div class="shang_10 div_in_chuizhi">
+
+                            <div class="tou_20 div_in_shuiping">
                                 <p>Posted on：{{ foo.create_time }}</p>
                             </div>
-{#                            <div class="tou_20 div_in_chuizhi">#}
-{#                                <a>{{ foo.creat_time}}</a>#}
-{#                            </div>#}
+
 
                             <div class="last_zuo div_in_juzhong">
                                 <div >
                                      <a href="good_detail?id={{ foo.id }}">
-                                        <img height="150" width="150" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
+                                        <img height="100" width="100" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
                                      </a>
                                 </div>
                             </div>
@@ -187,36 +193,49 @@
                                 </button>
                             </div>
                         </div>
+{#                        </div>#}
                     {% endfor %}
-                </div>
+
             </div>
+        </div>
 
 {#             show 3 selling list#}
             <div class="layui-tab-item">
                 <div class="big_bg">
                     {% for foo in selling_list %}
                         <div class="show_1_1">
-                            <div class="tou_20 div_in_chuizhi">
-                                <h2>{{ foo.creat_time}}</h2>
+                            <div class="tou_20 div_in_shuiping">
+                                <P>Posted on：{{ foo.create_time}}</P>
                             </div>
 
                             <div class="last_zuo div_in_juzhong">
                                 <div >
                                     <a href="good_detail?id={{ foo.id }}">
-                                        <img height="50" width="50" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
+                                        <img height="100" width="100" src="/media/img/{{ MEDIA_URL }}{{ foo.img }}">
                                     </a>
                                 </div>
                             </div>
 
                             <div class="last_middle">
                                 <div class="last_middle_1">
-                                    <h2>{{ foo.name }}</h2>
+                                    <h2> {{ foo.name }}</h2>
                                 </div>
 
                                 <div class="last_middle_2">
                                     <h2 style="float: left">$</h2>
-                                    <div class="jiage">{{ foo.price }}</div>
+                                    <div class="jiage"> {{ foo.price }}</div>
                                 </div>
+
+                                <div class="last_middle_1">
+                                    <h2>Had been viewed: {{ foo.view_times }}</h2>
+                                </div>
+
+{#                                <div class="last_middle_3">#}
+{#                                    <h2 style="float: left">description</h2>#}
+{#                                    <div> {{ foo.detail }}</div>#}
+{#                                </div>#}
+
+
                             </div>
 
                             <div class="last_you div_in_juzhong">
@@ -232,7 +251,8 @@
 {#             show 4#}
             <div class="layui-tab-item">
                 <div class="big_bg">
-                    sdjfaksdk
+                    <P>IF YOU HAVE ANY QUESTION, PLEASE EMAIL ME!</P>
+                    <P>EMAIL: fansh@oregonstate.edu</P>
                 </div>
             </div>
         </div>
